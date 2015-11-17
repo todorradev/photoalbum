@@ -79,7 +79,7 @@ public class UserUtils {
 		
 		FileOutputStream fos = null;
 		try {
-			fos = new FileOutputStream(imageFile + ".jpg");
+			fos = new FileOutputStream(imageFile);
 			fos.write(content);
 		} catch (IOException ex) {
 			System.out.println("IOException: " + ex);

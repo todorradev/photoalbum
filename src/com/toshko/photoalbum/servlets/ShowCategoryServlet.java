@@ -52,6 +52,7 @@ public class ShowCategoryServlet extends HttpServlet {
 			//aRequest.setAttribute("username", username);
 			aRequest.setAttribute("searchCategoriesAndPictures", "");
 			aRequest.getRequestDispatcher("MainPage.jsp").forward(aRequest, aResponse);
+			return;
 		}
 		Object objUsername = session.getAttribute("USER");
 		String username = objUsername.toString();
@@ -125,6 +126,7 @@ public class ShowCategoryServlet extends HttpServlet {
 					String pictureId = sb.toString();
 					if(file.getName().contains(pictureId)) {
 						pictures.remove(picture);
+						break;
 					}
 					
 				}
