@@ -41,6 +41,8 @@ function showNavigationIcons(id)
 	editImg.style.display="inline";
 	var rotateImg = document.getElementById("rotateIcon" + id);
 	rotateImg.style.display="inline";
+	var faceDetectionImg = document.getElementById("faceDetectionIcon" + id);
+	faceDetectionImg.style.display="inline";
 }
 
 function hideNavigationIcons(id)
@@ -51,6 +53,8 @@ function hideNavigationIcons(id)
 	editImg.style.display="none";
 	var rotateImg = document.getElementById("rotateIcon" + id);
 	rotateImg.style.display="none";
+	var faceDetectionImg = document.getElementById("faceDetectionIcon" + id);
+	faceDetectionImg.style.display="none";
 }
 
 function deleteImage(href)
@@ -67,6 +71,11 @@ function editImage(href)
 }
 
 function rotateImage(href)
+{
+	window.location.href=href;
+}
+
+function faceDetectionImage(href)
 {
 	window.location.href=href;
 }
@@ -115,6 +124,8 @@ function rotateImage(href)
 							String downloadImgHref = "/PhotoAlbum/downloadImage/"+picture.getName()+".jpg?userId=" + request.getAttribute("userId") + "&categoryId=" + categoryId + "&pictureId=" + picture.getId();
 							String showImgHref ="/PhotoAlbum/showPictures.do?userId=" + request.getAttribute("userId") + "&categoryId=" + categoryId + "&pictureId=" + picture.getId();
 							String rotateImg = "/PhotoAlbum/rotatePicture.do?userId=" + request.getAttribute("userId") + "&categoryId=" + categoryId + "&pictureId=" + picture.getId();
+							boolean test = true;
+							String faceDetectionImg = "/PhotoAlbum/showCategories.do?userId=" + request.getAttribute("userId") + "&categoryId=" + categoryId + "&pictureId=" + picture.getId() + "&faceDetection=" + test;
 					%>
 							<div class="col-6 col-sm-6 col-lg-4" onmouseover="showNavigationIcons(<%=picture.getId()%>)" onmouseout="hideNavigationIcons(<%=picture.getId()%>)">
 								<h2><%= picture.getName()%></h2>
@@ -124,6 +135,7 @@ function rotateImage(href)
 								<img class="deleteIcon" id="deleteIcon<%=picture.getId()%>" src="/PhotoAlbum/img/delete.jpg" onclick="deleteImage('<%=deleteImgHref%>')">
 								<img class="editIcon" id="editIcon<%=picture.getId()%>" src="/PhotoAlbum/img/edit.jpg" onclick="editImage('<%=editImgHref%>')">
 								<img class="rotateIcon" id="rotateIcon<%=picture.getId()%>" src="/PhotoAlbum/img/rotate.png" onclick="rotateImage('<%=rotateImg%>')">
+								<img class="faceDetectionIcon" id="faceDetectionIcon<%=picture.getId()%>" src="/PhotoAlbum/img/faceDetection.png" onclick="rotateImage('<%=faceDetectionImg%>')">
 							</div>
 					<% } %>
 				</div><!--/row-->

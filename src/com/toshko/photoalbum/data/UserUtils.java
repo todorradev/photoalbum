@@ -40,6 +40,14 @@ public class UserUtils {
 		File imageFile = new File(String.format("%s/%s/%s/%s", root, userId, categoryId, imageId) + ".jpg");
 		return imageFile;
 	}
+	
+	public static File[] getPicturesPathByCategory(int userId, int categoryId, int imageId){
+		File root = getPicturesRoot();
+		File categoryPath = new File(String.format("%s/%s/%s/", root, userId, categoryId));
+		File dir = new File(categoryPath.getAbsolutePath());
+		File[] directoryImagesListing = dir.listFiles();
+		return directoryImagesListing;
+	}
 	public static byte[] loadPicture(int userId, int categoryId, int imageId){
 		File imageFile = getPicturePath(userId, categoryId, imageId);
 		

@@ -12,7 +12,6 @@ public class Test {
 	}
 
 	private static int test(int i) {
-		// TODO Auto-generated method stub
 		return i+1;
 	}
 }

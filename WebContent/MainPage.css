@@ -382,6 +382,16 @@ a {
 	cursor:hand;
 }
 
+.faceDetectionIcon {
+	display:none;	
+	position:absolute;
+	width:16px;
+	height:16px;
+	top: 40px;
+	left: 81px;
+	cursor:hand;
+}
+
 #deleteUserProfileOption, #deleteCategoryOptions{
 	cursor:hand;
 	color:blue;

@@ -79,6 +79,11 @@
 	</servlet>
 	
 	<servlet>
+		<servlet-name>faceDetection</servlet-name>
+		<servlet-class>com.toshko.photoalbum.image.processing.FaceDetectionServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
 		<servlet-name>deleteUser</servlet-name>
 		<servlet-class>com.toshko.photoalbum.servlets.DeleteUserServlet</servlet-class>
 	</servlet>
@@ -176,6 +181,11 @@
 	<servlet-mapping>
 		<servlet-name>rotatePicture</servlet-name>
 		<url-pattern>/rotatePicture.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>faceDetection</servlet-name>
+		<url-pattern>/faceDetection.do</url-pattern>
 	</servlet-mapping>
 	
 	<servlet-mapping>
