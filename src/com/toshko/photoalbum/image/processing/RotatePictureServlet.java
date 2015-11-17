@@ -39,21 +39,18 @@ public class RotatePictureServlet extends HttpServlet {
 	}
 	
 	private void rotateImage(int userId, int categoryId, int pictureId) {
-		String opencvpath = "C:/Program Files/OpenCV/opencv/build/java/x64/";
-		//if(Runtime.getRuntime().loadLibrary(opencvpath + Core.NATIVE_LIBRARY_NAME + ".dll" != null))
-		System.load(opencvpath + Core.NATIVE_LIBRARY_NAME + ".dll");
+		System.loadLibrary( Core.NATIVE_LIBRARY_NAME );
 		
 		File file = UserUtils.getPicturePath(userId, categoryId, pictureId);
 		Mat cvImage = Imgcodecs.imread(file.getAbsolutePath());
 		
 		int i = 0;
-		while (i < 2 ) {
+		while (i < 1 ) {
 			Core.transpose(cvImage, cvImage);
 			Core.flip(cvImage, cvImage, 1);
 			i++;
 		}
 		String path = file.getAbsolutePath();
-		String test = file.getName();
 		//file.delete();
 		Imgcodecs.imwrite(path, cvImage);
 		
