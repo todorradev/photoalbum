@@ -1,0 +1,216 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app>
+	<filter>
+		<filter-name>AuthenticationFilter</filter-name>
+		<filter-class>com.toshko.photoalbum.filters.AuthenticationFilter</filter-class>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>AuthenticationFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+ 	</filter-mapping>
+	
+	<servlet>
+		<servlet-name>Login</servlet-name>
+		<servlet-class>com.toshko.photoalbum.servlets.LoginServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>Register</servlet-name>
+		<servlet-class>com.toshko.photoalbum.servlets.RegisterServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>Logout</servlet-name>
+		<servlet-class>com.toshko.photoalbum.servlets.LogoutServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>LogoutAdmin</servlet-name>
+		<servlet-class>com.toshko.photoalbum.servlets.LogoutServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>editProfile</servlet-name>
+		<servlet-class>com.toshko.photoalbum.servlets.EditProfileServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>showCategories</servlet-name>
+		<servlet-class>com.toshko.photoalbum.servlets.ShowCategoryServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>showPictures</servlet-name>
+		<servlet-class>com.toshko.photoalbum.servlets.ShowPictureServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>addCategory</servlet-name>
+		<servlet-class>com.toshko.photoalbum.servlets.AddCategoryServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>addPicture</servlet-name>
+		<servlet-class>com.toshko.photoalbum.servlets.AddPictureServlet</servlet-class>
+	</servlet>
+
+	<servlet>
+		<servlet-name>downloadImage</servlet-name>
+		<servlet-class>com.toshko.photoalbum.servlets.ImageDownloaderServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>deleteCategory</servlet-name>
+		<servlet-class>com.toshko.photoalbum.servlets.DeleteCategoryServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>deletePicture</servlet-name>
+		<servlet-class>com.toshko.photoalbum.servlets.DeletePictureServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>rotatePicture</servlet-name>
+		<servlet-class>com.toshko.photoalbum.image.processing.RotatePictureServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>deleteUser</servlet-name>
+		<servlet-class>com.toshko.photoalbum.servlets.DeleteUserServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>editPicture</servlet-name>
+		<servlet-class>com.toshko.photoalbum.servlets.EditPictureServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>editCategory</servlet-name>
+		<servlet-class>com.toshko.photoalbum.servlets.EditCategoryServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>adminPage</servlet-name>
+		<servlet-class>com.toshko.photoalbum.servlets.AdminPageServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>adminApprovedPicture</servlet-name>
+		<servlet-class>com.toshko.photoalbum.servlets.AdminApprovedPictureServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>adminDeletePicture</servlet-name>
+		<servlet-class>com.toshko.photoalbum.servlets.AdminDeletePictureServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>changePass</servlet-name>
+		<servlet-class>com.toshko.photoalbum.servlets.ChangePasswordServlet</servlet-class>
+	</servlet>
+		
+	<servlet-mapping>
+		<servlet-name>Login</servlet-name>
+		<url-pattern>/login</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>Register</servlet-name>
+		<url-pattern>/register</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>Logout</servlet-name>
+		<url-pattern>/logout</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>LogoutAdmin</servlet-name>
+		<url-pattern>/logoutAdmin</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>editProfile</servlet-name>
+		<url-pattern>/editProfileForm</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>showCategories</servlet-name>
+		<url-pattern>/showCategories.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>addCategory</servlet-name>
+		<url-pattern>/addingCategory</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>addPicture</servlet-name>
+		<url-pattern>/addingPicture</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>downloadImage</servlet-name>
+		<url-pattern>/downloadImage/*</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>showPictures</servlet-name>
+		<url-pattern>/showPictures.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>deleteCategory</servlet-name>
+		<url-pattern>/deleteCategory.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>deletePicture</servlet-name>
+		<url-pattern>/deletePicture.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>rotatePicture</servlet-name>
+		<url-pattern>/rotatePicture.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>deleteUser</servlet-name>
+		<url-pattern>/deleteUser.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>editPicture</servlet-name>
+		<url-pattern>/editPicture</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>editCategory</servlet-name>
+		<url-pattern>/editCategory</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>adminPage</servlet-name>
+		<url-pattern>/AdminPageServlet.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>adminApprovedPicture</servlet-name>
+		<url-pattern>/AdminApprovedPicture.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>adminDeletePicture</servlet-name>
+		<url-pattern>/AdminDeletePicture.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>changePass</servlet-name>
+		<url-pattern>/changePassword</url-pattern>
+	</servlet-mapping>
+	
+</web-app>

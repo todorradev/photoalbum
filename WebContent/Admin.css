@@ -1,0 +1,60 @@
+.adminMessage{
+position: absolute;
+top: 50%;
+left: 50%;
+margin-top: -50px;
+margin-left: -180px;
+font-size: 1.5em;
+font-weight: 700;
+font-style: italic;
+color:red;
+}
+
+body {
+	background:#aaa;
+}
+
+.logoutAdmin{
+	text-decoration:none;
+	background-color:#279103;
+	color:white;
+	border: none;
+	padding: 5px 20px;
+	border-radius: 5px;
+	font-weight: bold;
+	cursor: pointer; 
+	cursor: hand;
+	float:right;
+    margin-right:5px;
+       
+}
+
+.logoutAdmin:hover {
+	background: #22cc44;	
+}
+
+#approvedPicture {
+	margin-left:10px;
+	text-decoration:none;
+}
+
+#notApprovedPicture {
+	margin-left:20px;
+	text-decoration:none;
+}
+
+#approvedPicture:hover {
+	color:red;
+	text-decoration:underline;
+}
+
+#notApprovedPicture:hover {
+	color:red;
+	text-decoration:underline;
+}
+
+
+.waitingForApprovingPicture {
+	margin-right:10px;
+	margin-top:10px;
+}

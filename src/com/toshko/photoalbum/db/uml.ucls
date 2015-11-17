@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.6" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true">  
+  <class id="1" language="java" name="com.toshko.photoalbum.db.PictureDB" project="PhotoAlbum" 
+    file="/PhotoAlbum/src/com/toshko/photoalbum/db/PictureDB.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="373" width="237" x="758" y="10"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="com.toshko.photoalbum.db.UserRegistry" project="PhotoAlbum" 
+    file="/PhotoAlbum/src/com/toshko/photoalbum/db/UserRegistry.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="372" width="258" x="28" y="12"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="com.toshko.photoalbum.db.CategoryDB" project="PhotoAlbum" 
+    file="/PhotoAlbum/src/com/toshko/photoalbum/db/CategoryDB.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="375" width="366" x="343" y="10"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="com.toshko.photoalbum.dto.Picture" project="PhotoAlbum" 
+    file="/PhotoAlbum/src/com/toshko/photoalbum/dto/Picture.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="494" width="240" x="759" y="394"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="com.toshko.photoalbum.dto.Category" project="PhotoAlbum" 
+    file="/PhotoAlbum/src/com/toshko/photoalbum/dto/Category.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="497" width="369" x="341" y="395"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="com.toshko.photoalbum.dto.User" project="PhotoAlbum" 
+    file="/PhotoAlbum/src/com/toshko/photoalbum/dto/User.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="499" width="254" x="31" y="393"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    accessors="true" visibility="true">    
+    <attributes public="true" package="false" protected="false" private="false" static="false"/>    
+    <operations public="true" package="false" protected="false" private="false" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

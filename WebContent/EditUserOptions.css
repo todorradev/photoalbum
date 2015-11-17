@@ -1,0 +1,156 @@
+#name {
+	margin-left: 201px;
+	border-radius: 5px;
+	background: #eee;
+	padding:2px;
+}
+
+#lastName {
+	margin-left: 165px;
+	border-radius: 5px;
+	background: #eee;
+	margin-top: 20px;
+	padding:2px;
+}
+
+#email {
+	margin-left: 183px;
+	border-radius: 5px;
+	background: #eee;
+	margin-top: 20px;
+	padding:2px;
+}
+
+.pass {
+	margin-left: 157px;
+	border-radius: 5px;
+	background: #eee;
+}
+
+.newPassword {
+	margin-left: 201px;
+	border-radius: 5px;
+	background: #eee;
+	margin-top: 20px;
+}
+
+.confirmPass {
+	margin-left: 170px;
+	border-radius: 5px;
+	background: #eee;
+	margin-top: 20px;
+}
+
+#description {
+	margin-top: 20px;
+	margin-left: 230px;
+	border-radius: 5px;
+	background: #eee;
+}
+
+#editUserOptions {
+	margin-left: 15px;
+}
+
+.upload {
+	margin-left: 73px;
+	margin-top: 20px;
+	position: absolute;
+	margin-top: 38px;
+}
+
+#cancelButton {
+   border-top: 1px solid #7392a6;
+   background: #5e686e;
+   background: -moz-linear-gradient(top, #3e779d, #547991);
+   background: -ms-linear-gradient(top, #3e779d, #547991);
+   background: -o-linear-gradient(top, #3e779d, #547991);
+   padding: 8px 12px;
+   -moz-border-radius: 15px;
+   border-radius: 15px;
+   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   box-shadow: rgba(0,0,0,1) 0 1px 0;
+   text-shadow: rgba(0,0,0,.4) 0 1px 0;
+   color: white;
+   font-size: 17px;
+   font-family: Georgia, serif;
+   text-decoration: none;
+   vertical-align: middle;
+   margin-left:250px;
+}
+
+#cancelButton:hover {
+   border-top-color: #12374f;
+   background: #12374f;
+   color: #b0b0b0;
+}
+#cancelButton:active {
+   border-top-color: #3c4a54;
+   background: #3c4a54;
+}
+
+#saveButton {
+   border-top: 1px solid #7392a6;
+   background: #5e686e;
+   background: -moz-linear-gradient(top, #3e779d, #547991);
+   background: -ms-linear-gradient(top, #3e779d, #547991);
+   background: -o-linear-gradient(top, #3e779d, #547991);
+   padding: 8px 12px;
+   -moz-border-radius: 15px;
+   border-radius: 15px;
+   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   box-shadow: rgba(0,0,0,1) 0 1px 0;
+   text-shadow: rgba(0,0,0,.4) 0 1px 0;
+   color: white;
+   font-size: 17px;
+   font-family: Georgia, serif;
+   text-decoration: none;
+   vertical-align: middle;
+   margin-top:90px;
+}
+
+#saveButton:hover {
+   border-top-color: #12374f;
+   background: #12374f;
+   color: #b0b0b0;
+   
+}
+#saveButton:active {
+   border-top-color: #3c4a54;
+   background: #3c4a54;
+}
+
+label {
+	font-size:20px;
+	font-style:italic;
+}
+
+#labels {
+	font-size:18px;
+	font-style:italic;
+}
+
+#decline {
+	margin-top:-25px;
+}
+
+#descriptionText {
+	position: absolute;
+	margin-top: -40px;
+}
+
+.changePasswordError {
+	position: fixed;
+	margin-top: 75px;
+	color:red;
+	font-weight: 700;
+}
+
+.changePasswordSuccess {
+	position: fixed;
+	margin-top: 35px;
+	color:green;
+	font-weight: 700;
+}

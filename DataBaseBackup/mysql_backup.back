@@ -1,0 +1,205 @@
+-- MySQL dump 10.13  Distrib 5.6.17, for Win64 (x86_64)
+--
+-- Host: localhost    Database: photoalbum
+-- ------------------------------------------------------
+-- Server version	5.6.17
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `admin`
+--
+
+DROP TABLE IF EXISTS `admin`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `admin` (
+  `userId` int(11) DEFAULT NULL,
+  `categoryId` int(11) DEFAULT NULL,
+  `pictureId` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `admin`
+--
+
+LOCK TABLES `admin` WRITE;
+/*!40000 ALTER TABLE `admin` DISABLE KEYS */;
+INSERT INTO `admin` VALUES (4,30,76),(4,30,77),(4,30,78),(4,30,79),(4,30,80),(4,30,81);
+/*!40000 ALTER TABLE `admin` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `category`
+--
+
+DROP TABLE IF EXISTS `category`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `category` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) DEFAULT NULL,
+  `description` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `category`
+--
+
+LOCK TABLES `category` WRITE;
+/*!40000 ALTER TABLE `category` DISABLE KEYS */;
+INSERT INTO `category` VALUES (27,'user','Automatically created'),(30,'smcho','op'),(37,'x','Automatically created'),(42,'totti','Automatically created'),(45,'abv','Automatically created'),(46,'avc','Automatically created'),(55,'nikola','Automatically created'),(57,'abc',''),(58,'d',''),(65,'testova kategoriq','nekvo opisanie'),(66,'testuser','Automatically created'),(67,'todorradev','Automatically created'),(68,'categoryForTest','description'),(69,'categoryForTest','description'),(70,'categoryForTest','description');
+/*!40000 ALTER TABLE `category` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `categoryxpictures`
+--
+
+DROP TABLE IF EXISTS `categoryxpictures`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `categoryxpictures` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `categoryId` int(11) DEFAULT NULL,
+  `pictureId` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `categoryxpictures`
+--
+
+LOCK TABLES `categoryxpictures` WRITE;
+/*!40000 ALTER TABLE `categoryxpictures` DISABLE KEYS */;
+INSERT INTO `categoryxpictures` VALUES (46,30,41),(53,30,48),(55,30,50),(56,30,51),(57,30,52),(58,30,53),(59,30,54),(60,30,55),(64,30,59),(65,30,60),(67,30,66),(68,37,67),(70,30,69),(75,30,74),(76,30,82),(77,30,75);
+/*!40000 ALTER TABLE `categoryxpictures` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `categoryxsubcategory`
+--
+
+DROP TABLE IF EXISTS `categoryxsubcategory`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `categoryxsubcategory` (
+  `categoryId` int(11) DEFAULT NULL,
+  `subcategoryId` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `categoryxsubcategory`
+--
+
+LOCK TABLES `categoryxsubcategory` WRITE;
+/*!40000 ALTER TABLE `categoryxsubcategory` DISABLE KEYS */;
+INSERT INTO `categoryxsubcategory` VALUES (-1,27),(-1,30),(30,31),(-1,37),(30,38),(30,39),(-1,42),(30,43),(30,44),(-1,45),(-1,46),(30,52),(-1,55),(55,56),(55,57),(55,58),(30,65),(-1,66),(-1,67),(-1,68),(-1,69),(-1,70);
+/*!40000 ALTER TABLE `categoryxsubcategory` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pictures`
+--
+
+DROP TABLE IF EXISTS `pictures`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pictures` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) DEFAULT NULL,
+  `description` varchar(100) DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `size` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pictures`
+--
+
+LOCK TABLES `pictures` WRITE;
+/*!40000 ALTER TABLE `pictures` DISABLE KEYS */;
+INSERT INTO `pictures` VALUES (48,'waves','tova mi e snimkata ot New York','2014-05-23',49754),(50,'sun','','2014-05-23',34991),(51,'nova snimka','','2014-05-24',34991),(52,'ivka','','2014-05-24',39164),(53,'ribka','','2014-05-24',32671),(54,'snimka ot moreto','tazi snimka mi e ot slynchev brqg','2014-05-24',25965),(55,'Dubai','Ot dubai','2014-05-24',457449),(59,'posleden test pravim','da vidim kvo shte stane','2014-05-25',34991),(60,'snimka ot dubai','keeef :)','2014-05-25',49754),(66,'aaa','','2014-05-25',49754),(67,'s','','2014-05-25',39164),(69,'dd','asdsdadsadsaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa das dasd asd asd asd as ','2014-05-26',32671),(74,'test','','2014-06-06',1815660),(75,'aa','','2014-06-09',49754),(76,'1','','2014-06-09',34991),(77,'2','','2014-06-09',39164),(78,'3','','2014-06-09',10269),(79,'4','','2014-06-09',25965),(80,'5','','2014-06-09',32671),(81,'6','','2014-06-09',225134),(82,'kompresirana','','2014-06-10',486097);
+/*!40000 ALTER TABLE `pictures` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(100) DEFAULT NULL,
+  `password` varchar(100) DEFAULT NULL,
+  `firstName` varchar(100) DEFAULT NULL,
+  `lastName` varchar(100) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (3,'user','nov','s','s','s'),(4,'smcho','smchoo','todor','rade','s'),(5,'x','x','x','x','x'),(8,'totti','smchoo','test','s','s'),(13,'abv','a','a','a','a'),(14,'avc','aa','asda','sda','sadsd'),(23,'nikola','ronaldo','nikola','ivanov','dredam@abv.bg'),(26,'testuser',NULL,'FirstName','LastName','me@test.org'),(30,'todorradev',NULL,'Todor','Radev','todor.r.radev@gmail.com');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `userxcategory`
+--
+
+DROP TABLE IF EXISTS `userxcategory`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `userxcategory` (
+  `userId` int(11) NOT NULL DEFAULT '0',
+  `categoryId` int(11) DEFAULT NULL,
+  PRIMARY KEY (`userId`),
+  UNIQUE KEY `categoryId` (`categoryId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `userxcategory`
+--
+
+LOCK TABLES `userxcategory` WRITE;
+/*!40000 ALTER TABLE `userxcategory` DISABLE KEYS */;
+INSERT INTO `userxcategory` VALUES (3,27),(4,30),(5,37),(8,42),(13,45),(14,46),(23,55),(26,66),(30,67);
+/*!40000 ALTER TABLE `userxcategory` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2014-06-12 22:39:56
