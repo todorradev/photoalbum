@@ -17,7 +17,7 @@
   }
   
   if (category == null) {
-	  throw new RuntimeException("Stupid bastard category is null, categoryId=" + categoryId);
+	  throw new RuntimeException("Category is null, categoryId=" + categoryId);
   }
   
   Collection<Category> parentCategories = (Collection<Category>)session.getAttribute("parentCategories");

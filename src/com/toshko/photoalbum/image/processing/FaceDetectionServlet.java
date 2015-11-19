@@ -2,7 +2,6 @@ package com.toshko.photoalbum.image.processing;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Collection;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,16 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfRect;
-import org.opencv.core.Point;
-import org.opencv.core.Rect;
-import org.opencv.core.Scalar;
 import org.opencv.imgcodecs.Imgcodecs;
-import org.opencv.imgproc.Imgproc;
 import org.opencv.objdetect.CascadeClassifier;
 
 import com.toshko.photoalbum.data.UserUtils;
-import com.toshko.photoalbum.db.CategoryXPictures;
-import com.toshko.photoalbum.dto.Picture;
 
 public class FaceDetectionServlet extends HttpServlet{
 	/**

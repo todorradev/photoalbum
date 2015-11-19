@@ -344,16 +344,16 @@ a {
 	text-decoration: none;
 }
 
-.editProfile label {  
-	float: left;  
-	width: 10em;  
-	margin-right: 1em;  
-	text-align: right;  
+.editProfile label {
+	float: left;
+	width: 10em;
+	margin-right: 1em;
+	text-align: right;
 }
 
 
 .deleteIcon {
-	display:none;	
+	display:none;
 	position:absolute;
 	width:16px;
 	height:16px;
@@ -363,7 +363,7 @@ a {
 }
 
 .editIcon {
-	display:none;	
+	display:none;
 	position:absolute;
 	width:16px;
 	height:16px;
@@ -373,7 +373,7 @@ a {
 }
 
 .rotateIcon {
-	display:none;	
+	display:none;
 	position:absolute;
 	width:16px;
 	height:16px;
@@ -383,12 +383,22 @@ a {
 }
 
 .faceDetectionIcon {
-	display:none;	
+	display:none;
 	position:absolute;
 	width:16px;
 	height:16px;
 	top: 40px;
 	left: 81px;
+	cursor:hand;
+}
+
+.cropImageIcon {
+	display:none;
+	position:absolute;
+	width:16px;
+	height:16px;
+	top: 40px;
+	left: 101px;
 	cursor:hand;
 }
 

@@ -49,7 +49,6 @@ public class ShowCategoryServlet extends HttpServlet {
 			
 			aRequest.setAttribute("pictures", pictures);
 			aRequest.setAttribute("userId", userId);
-			//aRequest.setAttribute("username", username);
 			aRequest.setAttribute("searchCategoriesAndPictures", "");
 			aRequest.getRequestDispatcher("MainPage.jsp").forward(aRequest, aResponse);
 			return;

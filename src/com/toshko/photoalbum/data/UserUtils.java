@@ -31,7 +31,7 @@ public class UserUtils {
 	}
 	
 	private static File getPicturesRoot(){
-		File result = new File("C:\\webhome_eclipse_workspace\\PhotoAlbum\\dbPictures");
+		File result = new File("C:\\workspace\\Diplomna rabota\\PhotoAlbum\\WebContent\\dbPictures");
 		result.mkdirs();
 		return result;
 	}

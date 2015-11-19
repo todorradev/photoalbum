@@ -7,8 +7,12 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
+	
 	<!-- Add jQuery library -->
 	<script type="text/javascript" src="/PhotoAlbum/fancybox/lib/jquery-1.10.1.min.js"></script>
+
+
+	<script type="text/javascript" src="/PhotoAlbum/cropper-master/assets/js/jquery.min.js"></script>
 
 	<!-- Add mousewheel plugin (this is optional) -->
 	<script type="text/javascript" src="/PhotoAlbum/fancybox/lib/jquery.mousewheel-3.0.6.pack.js"></script>
@@ -27,7 +31,7 @@
 
 	<!-- Add Media helper (this is optional) -->
 	<script type="text/javascript" src="/PhotoAlbum/fancybox/source/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
-	
+
 <script type="text/javascript">
 $(document).ready(function() {
  $(".fancyGroup").fancybox();
@@ -43,6 +47,8 @@ function showNavigationIcons(id)
 	rotateImg.style.display="inline";
 	var faceDetectionImg = document.getElementById("faceDetectionIcon" + id);
 	faceDetectionImg.style.display="inline";
+	var cropImg = document.getElementById("cropImageIcon" + id);
+	cropImg.style.display="inline";
 }
 
 function hideNavigationIcons(id)
@@ -55,6 +61,8 @@ function hideNavigationIcons(id)
 	rotateImg.style.display="none";
 	var faceDetectionImg = document.getElementById("faceDetectionIcon" + id);
 	faceDetectionImg.style.display="none";
+	var cropImg = document.getElementById("cropImageIcon" + id);
+	cropImg.style.display="none";
 }
 
 function deleteImage(href)
@@ -99,7 +107,8 @@ function faceDetectionImage(href)
 		<div class="row row-offcanvas row-offcanvas-right">
 			<div class="col-xs-12 col-sm-9">
 				<jsp:include page="showCurrentPath.jsp"/>
-
+				<!-- Wrap the image or canvas element with a block element -->
+				
 				<div class="row">
 					<%
 						Collection<Category> categories = (Collection<Category>)request.getAttribute("childCategories");
@@ -124,8 +133,9 @@ function faceDetectionImage(href)
 							String downloadImgHref = "/PhotoAlbum/downloadImage/"+picture.getName()+".jpg?userId=" + request.getAttribute("userId") + "&categoryId=" + categoryId + "&pictureId=" + picture.getId();
 							String showImgHref ="/PhotoAlbum/showPictures.do?userId=" + request.getAttribute("userId") + "&categoryId=" + categoryId + "&pictureId=" + picture.getId();
 							String rotateImg = "/PhotoAlbum/rotatePicture.do?userId=" + request.getAttribute("userId") + "&categoryId=" + categoryId + "&pictureId=" + picture.getId();
-							boolean test = true;
-							String faceDetectionImg = "/PhotoAlbum/showCategories.do?userId=" + request.getAttribute("userId") + "&categoryId=" + categoryId + "&pictureId=" + picture.getId() + "&faceDetection=" + test;
+							String faceDetectionEnabled = "true";
+							String faceDetectionImg = "/PhotoAlbum/showCategories.do?userId=" + request.getAttribute("userId") + "&categoryId=" + categoryId + "&pictureId=" + picture.getId() + "&faceDetection=" + faceDetectionEnabled;
+							String cropImg = "/PhotoAlbum/cropper-master/demo/index.jsp?userId=" + request.getAttribute("userId") + "&categoryId=" + categoryId + "&pictureId=" + picture.getId();
 					%>
 							<div class="col-6 col-sm-6 col-lg-4" onmouseover="showNavigationIcons(<%=picture.getId()%>)" onmouseout="hideNavigationIcons(<%=picture.getId()%>)">
 								<h2><%= picture.getName()%></h2>
@@ -136,6 +146,7 @@ function faceDetectionImage(href)
 								<img class="editIcon" id="editIcon<%=picture.getId()%>" src="/PhotoAlbum/img/edit.jpg" onclick="editImage('<%=editImgHref%>')">
 								<img class="rotateIcon" id="rotateIcon<%=picture.getId()%>" src="/PhotoAlbum/img/rotate.png" onclick="rotateImage('<%=rotateImg%>')">
 								<img class="faceDetectionIcon" id="faceDetectionIcon<%=picture.getId()%>" src="/PhotoAlbum/img/faceDetection.png" onclick="rotateImage('<%=faceDetectionImg%>')">
+								<img class="cropImageIcon" id="cropImageIcon<%=picture.getId()%>" src="/PhotoAlbum/img/scissors.png" onclick="rotateImage('<%=cropImg%>')">
 							</div>
 					<% } %>
 				</div><!--/row-->
@@ -149,7 +160,7 @@ function faceDetectionImage(href)
 			
 		</div><!--/row-->
 
-	    <jsp:include page="footer.jsp"></jsp:include>
+		<jsp:include page="footer.jsp"></jsp:include>
 	</div>
 </body>
 </html>
