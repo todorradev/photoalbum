@@ -11,9 +11,6 @@
 	<!-- Add jQuery library -->
 	<script type="text/javascript" src="/PhotoAlbum/fancybox/lib/jquery-1.10.1.min.js"></script>
 
-
-	<script type="text/javascript" src="/PhotoAlbum/cropper-master/assets/js/jquery.min.js"></script>
-
 	<!-- Add mousewheel plugin (this is optional) -->
 	<script type="text/javascript" src="/PhotoAlbum/fancybox/lib/jquery.mousewheel-3.0.6.pack.js"></script>
 
