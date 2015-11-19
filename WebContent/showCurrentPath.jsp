@@ -28,7 +28,7 @@
 		<%
 			for (Category tmpCategory : parentCategories) { 
 		%>
-				<a href="/PhotoAlbum/showCategories.do?categoryId=<%= tmpCategory.getId()%>"><%= tmpCategory.getName() %></a>&gt;
+				<a href="/PhotoAlbum/showCategories.do?categoryId=<%= tmpCategory.getId()%>"><%= tmpCategory.getName() %></a>&nbsp&gt;
 		<% } %>
 		<a href="/PhotoAlbum/showCategories.do?categoryId=<%= category.getId()%>">
 			<%= category.getName() %> 

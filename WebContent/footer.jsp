@@ -3,5 +3,5 @@
 
 <hr />
 <footer>
-	<p id="footerText">© Copyright 2014  Todor Radev</p>
+	<p id="footerText">© Copyright 2015  Todor Radev</p>
 </footer>
