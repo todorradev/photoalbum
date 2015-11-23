@@ -125,7 +125,7 @@ function faceDetectionImage(href)
 					
 						Collection<Picture> pictures = (Collection<Picture>)request.getAttribute("pictures");
 						for (Picture picture : pictures) {
-							String deleteImgHref = "/PhotoAlbum/deletePicture.do?categoryId="+ categoryId+"&pictureId="+picture.getId();
+							String deleteImgHref = "/PhotoAlbum/deletePicture.do?userId=" + request.getAttribute("userId") + "&categoryId="+ categoryId+"&pictureId="+picture.getId();
 							String editImgHref="EditPicture.jsp?userId="+request.getAttribute("userId")+"&categoryId="+categoryId+"&pictureId="+picture.getId();
 							String downloadImgHref = "/PhotoAlbum/downloadImage/"+picture.getName()+".jpg?userId=" + request.getAttribute("userId") + "&categoryId=" + categoryId + "&pictureId=" + picture.getId();
 							String showImgHref ="/PhotoAlbum/showPictures.do?userId=" + request.getAttribute("userId") + "&categoryId=" + categoryId + "&pictureId=" + picture.getId();
