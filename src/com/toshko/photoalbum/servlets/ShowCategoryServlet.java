@@ -1,6 +1,5 @@
 package com.toshko.photoalbum.servlets;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
 
@@ -10,13 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.opencv.core.Core;
-import org.opencv.core.Mat;
-import org.opencv.core.MatOfRect;
-import org.opencv.imgcodecs.Imgcodecs;
-import org.opencv.objdetect.CascadeClassifier;
-
-import com.toshko.photoalbum.data.UserUtils;
 import com.toshko.photoalbum.db.CategoryDB;
 import com.toshko.photoalbum.db.CategoryXPictures;
 import com.toshko.photoalbum.db.UserRegistry;
@@ -24,6 +16,7 @@ import com.toshko.photoalbum.db.UserXCategoryDB;
 import com.toshko.photoalbum.dto.Category;
 import com.toshko.photoalbum.dto.Picture;
 import com.toshko.photoalbum.dto.User;
+import com.toshko.photoalbum.image.processing.FaceDetection;
 
 public class ShowCategoryServlet extends HttpServlet {
 	
@@ -39,9 +32,9 @@ public class ShowCategoryServlet extends HttpServlet {
 
 			String userIdStr = aRequest.getParameter("userId");
 			int userId = Integer.parseInt(userIdStr);
-			Collection <Picture> pictures = faceDetection(aRequest, userId);
+ 			Collection <Picture> pictures = FaceDetection.scanImages(aRequest, userId);
 			
-			aRequest.setAttribute("pictures", pictures);
+			
 			aRequest.setAttribute("userId", userId);
 			aRequest.setAttribute("searchCategoriesAndPictures", "");
 			aRequest.getRequestDispatcher("MainPage.jsp").forward(aRequest, aResponse);
@@ -101,47 +94,5 @@ public class ShowCategoryServlet extends HttpServlet {
 	
 	public void doPost(HttpServletRequest aRequest,HttpServletResponse aResponse) throws IOException, ServletException {
 		doGet(aRequest, aResponse);
-	}
-	
-	private Collection<Picture> faceDetection(HttpServletRequest aRequest, int userId) {
-		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-		System.out.println("\nRunning FaceDetector");
-
-		String categoryIdStr = aRequest.getParameter("categoryId");
-		String pictureIdStr = aRequest.getParameter("pictureId");
-
-		int categoryId = Integer.parseInt(categoryIdStr);
-		int picId = Integer.parseInt(pictureIdStr);
-
-		File[] listOfImages = UserUtils.getPicturesPathByCategory(userId, categoryId, picId);
-		if(listOfImages != null) {
-
-			CategoryXPictures categoryXPicture = new CategoryXPictures();
-			Collection<Picture> pictures  = categoryXPicture.getPicturesByCategory(categoryId, "");
-	
-			CascadeClassifier cascade1 = new CascadeClassifier();
-			cascade1.load("C:/Program Files/OpenCV/opencv/sources/data/haarcascades/haarcascade_frontalface_alt.xml");
-			MatOfRect faceDetections = new MatOfRect();
-	
-			for(File file : listOfImages) {
-				Mat image = Imgcodecs.imread(file.getAbsolutePath());
-				cascade1.detectMultiScale(image, faceDetections);
-				if(faceDetections.toArray().length == 0) {
-					for (Picture picture : pictures) {
-						StringBuilder sb = new StringBuilder();
-						sb.append(picture.getId());
-						String pictureId = sb.toString();
-						if(file.getName().contains(pictureId)) {
-							pictures.remove(picture);
-							break;
-						}
-						
-					}
-				}
-				System.out.println(String.format("Detected %s faces", faceDetections.toArray().length));
-			}
-			return pictures;
-		}
-		return null;
 	}
 }
