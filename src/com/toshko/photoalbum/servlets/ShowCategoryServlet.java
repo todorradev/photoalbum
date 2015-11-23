@@ -36,16 +36,10 @@ public class ShowCategoryServlet extends HttpServlet {
 		HttpSession session = aRequest.getSession(false);
 		String faceDection = aRequest.getParameter("faceDetection");
 		if(faceDection != null) {
+
 			String userIdStr = aRequest.getParameter("userId");
-			String categoryIdStr = aRequest.getParameter("categoryId");
-			String pictureIdStr = aRequest.getParameter("pictureId");
-			
 			int userId = Integer.parseInt(userIdStr);
-			int categoryId = Integer.parseInt(categoryIdStr);
-			int pictureId = Integer.parseInt(pictureIdStr);
-			
-			File[] allImages = UserUtils.getPicturesPathByCategory(userId, categoryId, pictureId);
-			Collection <Picture> pictures = faceDetection(allImages, categoryId);
+			Collection <Picture> pictures = faceDetection(aRequest, userId);
 			
 			aRequest.setAttribute("pictures", pictures);
 			aRequest.setAttribute("userId", userId);
@@ -53,6 +47,7 @@ public class ShowCategoryServlet extends HttpServlet {
 			aRequest.getRequestDispatcher("MainPage.jsp").forward(aRequest, aResponse);
 			return;
 		}
+
 		Object objUsername = session.getAttribute("USER");
 		String username = objUsername.toString();
 		Object objSearch = aRequest.getParameter("searchCategoriesAndPictures");
@@ -73,13 +68,16 @@ public class ShowCategoryServlet extends HttpServlet {
 		
 		Object objCategoryId = aRequest.getParameter("categoryId");
 		int categoryId = -2;
+
 		if(objCategoryId != null) {
 			categoryId = Integer.parseInt(objCategoryId.toString());
 		}
+
 		else {
 			UserXCategoryDB userCategory = new UserXCategoryDB();
 			categoryId = userCategory.getRootCategory(userId);
 		}
+
 		CategoryDB categoryDb = new CategoryDB();
 		Category category = categoryDb.getCategory(categoryId);
 		Collection<Category> childCategories = categoryDb.getDirectSubCategories(userId, categoryId, searchCategoriesAndPictures);
@@ -87,6 +85,7 @@ public class ShowCategoryServlet extends HttpServlet {
 		aRequest.setAttribute("category", category);
 		aRequest.setAttribute("categoryId", category.getId());
 		session.setAttribute("parentCategories", parentCategories);
+
 		if(childCategories.size() > 0) {
 			aRequest.setAttribute("childCategories", childCategories);
 		}
@@ -104,37 +103,45 @@ public class ShowCategoryServlet extends HttpServlet {
 		doGet(aRequest, aResponse);
 	}
 	
-	private Collection<Picture> faceDetection(File[] listOfImages, int categoryId) {
+	private Collection<Picture> faceDetection(HttpServletRequest aRequest, int userId) {
 		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 		System.out.println("\nRunning FaceDetector");
 
-		CategoryXPictures categoryXPicture = new CategoryXPictures();
-		Collection<Picture> pictures  = categoryXPicture.getPicturesByCategory(categoryId, "");
-		
-		CascadeClassifier cascade1 = new CascadeClassifier();
-		cascade1.load("C:\\Program Files\\OpenCV\\opencv\\sources\\data\\haarcascades\\haarcascade_frontalface_alt.xml");
-		MatOfRect faceDetections = new MatOfRect();
-		
-		for(File file : listOfImages) {
-			Mat image = Imgcodecs.imread(file.getAbsolutePath());
-			cascade1.detectMultiScale(image, faceDetections);
-			if(faceDetections.toArray().length == 0) {
-				for (Picture picture : pictures) {
-					StringBuilder sb = new StringBuilder();
-					sb.append(picture.getId());
-					String pictureId = sb.toString();
-					if(file.getName().contains(pictureId)) {
-						pictures.remove(picture);
-						break;
-					}
-					
-				}
-			}
-			System.out.println(String.format("Detected %s faces", faceDetections.toArray().length));
-		}
-		
-		return pictures;
-		
-	}
+		String categoryIdStr = aRequest.getParameter("categoryId");
+		String pictureIdStr = aRequest.getParameter("pictureId");
 
+		int categoryId = Integer.parseInt(categoryIdStr);
+		int picId = Integer.parseInt(pictureIdStr);
+
+		File[] listOfImages = UserUtils.getPicturesPathByCategory(userId, categoryId, picId);
+		if(listOfImages != null) {
+
+			CategoryXPictures categoryXPicture = new CategoryXPictures();
+			Collection<Picture> pictures  = categoryXPicture.getPicturesByCategory(categoryId, "");
+	
+			CascadeClassifier cascade1 = new CascadeClassifier();
+			cascade1.load("C:/Program Files/OpenCV/opencv/sources/data/haarcascades/haarcascade_frontalface_alt.xml");
+			MatOfRect faceDetections = new MatOfRect();
+	
+			for(File file : listOfImages) {
+				Mat image = Imgcodecs.imread(file.getAbsolutePath());
+				cascade1.detectMultiScale(image, faceDetections);
+				if(faceDetections.toArray().length == 0) {
+					for (Picture picture : pictures) {
+						StringBuilder sb = new StringBuilder();
+						sb.append(picture.getId());
+						String pictureId = sb.toString();
+						if(file.getName().contains(pictureId)) {
+							pictures.remove(picture);
+							break;
+						}
+						
+					}
+				}
+				System.out.println(String.format("Detected %s faces", faceDetections.toArray().length));
+			}
+			return pictures;
+		}
+		return null;
+	}
 }

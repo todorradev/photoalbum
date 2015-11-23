@@ -124,27 +124,29 @@ function faceDetectionImage(href)
 					<%
 					
 						Collection<Picture> pictures = (Collection<Picture>)request.getAttribute("pictures");
-						for (Picture picture : pictures) {
-							String deleteImgHref = "/PhotoAlbum/deletePicture.do?userId=" + request.getAttribute("userId") + "&categoryId="+ categoryId+"&pictureId="+picture.getId();
-							String editImgHref="EditPicture.jsp?userId="+request.getAttribute("userId")+"&categoryId="+categoryId+"&pictureId="+picture.getId();
-							String downloadImgHref = "/PhotoAlbum/downloadImage/"+picture.getName()+".jpg?userId=" + request.getAttribute("userId") + "&categoryId=" + categoryId + "&pictureId=" + picture.getId();
-							String showImgHref ="/PhotoAlbum/showPictures.do?userId=" + request.getAttribute("userId") + "&categoryId=" + categoryId + "&pictureId=" + picture.getId();
-							String rotateImg = "/PhotoAlbum/rotatePicture.do?userId=" + request.getAttribute("userId") + "&categoryId=" + categoryId + "&pictureId=" + picture.getId();
-							String faceDetectionEnabled = "true";
-							String faceDetectionImg = "/PhotoAlbum/showCategories.do?userId=" + request.getAttribute("userId") + "&categoryId=" + categoryId + "&pictureId=" + picture.getId() + "&faceDetection=" + faceDetectionEnabled;
-							String cropImg = "/PhotoAlbum/cropper-master/demo/index.jsp?userId=" + request.getAttribute("userId") + "&categoryId=" + categoryId + "&pictureId=" + picture.getId();
-					%>
-							<div class="col-6 col-sm-6 col-lg-4" onmouseover="showNavigationIcons(<%=picture.getId()%>)" onmouseout="hideNavigationIcons(<%=picture.getId()%>)">
-								<h2><%= picture.getName()%></h2>
-								<a class="fancyGroup" rel="group" href="<%=downloadImgHref%>" title="<%=picture.getDescription() %>">
-									<img class="normalPicture"  src="<%=downloadImgHref%>" alt="<%= picture.getName()%>" >
-								</a>
-								<img class="deleteIcon" id="deleteIcon<%=picture.getId()%>" src="/PhotoAlbum/img/delete.jpg" onclick="deleteImage('<%=deleteImgHref%>')">
-								<img class="editIcon" id="editIcon<%=picture.getId()%>" src="/PhotoAlbum/img/edit.jpg" onclick="editImage('<%=editImgHref%>')">
-								<img class="rotateIcon" id="rotateIcon<%=picture.getId()%>" src="/PhotoAlbum/img/rotate.png" onclick="rotateImage('<%=rotateImg%>')">
-								<img class="faceDetectionIcon" id="faceDetectionIcon<%=picture.getId()%>" src="/PhotoAlbum/img/faceDetection.png" onclick="rotateImage('<%=faceDetectionImg%>')">
-								<img class="cropImageIcon" id="cropImageIcon<%=picture.getId()%>" src="/PhotoAlbum/img/scissors.png" onclick="rotateImage('<%=cropImg%>')">
-							</div>
+						if(pictures != null) {
+							for (Picture picture : pictures) {
+								String deleteImgHref = "/PhotoAlbum/deletePicture.do?userId=" + request.getAttribute("userId") + "&categoryId="+ categoryId+"&pictureId="+picture.getId();
+								String editImgHref="EditPicture.jsp?userId="+request.getAttribute("userId")+"&categoryId="+categoryId+"&pictureId="+picture.getId();
+								String downloadImgHref = "/PhotoAlbum/downloadImage/"+picture.getName()+".jpg?userId=" + request.getAttribute("userId") + "&categoryId=" + categoryId + "&pictureId=" + picture.getId();
+								String showImgHref ="/PhotoAlbum/showPictures.do?userId=" + request.getAttribute("userId") + "&categoryId=" + categoryId + "&pictureId=" + picture.getId();
+								String rotateImg = "/PhotoAlbum/rotatePicture.do?userId=" + request.getAttribute("userId") + "&categoryId=" + categoryId + "&pictureId=" + picture.getId();
+								String faceDetectionEnabled = "true";
+								String faceDetectionImg = "/PhotoAlbum/showCategories.do?userId=" + request.getAttribute("userId") + "&categoryId=" + categoryId + "&pictureId=" + picture.getId() + "&faceDetection=" + faceDetectionEnabled;
+								String cropImg = "/PhotoAlbum/cropper-master/demo/index.jsp?userId=" + request.getAttribute("userId") + "&categoryId=" + categoryId + "&pictureId=" + picture.getId();
+						%>
+								<div class="col-6 col-sm-6 col-lg-4" onmouseover="showNavigationIcons(<%=picture.getId()%>)" onmouseout="hideNavigationIcons(<%=picture.getId()%>)">
+									<h2><%= picture.getName()%></h2>
+									<a class="fancyGroup" rel="group" href="<%=downloadImgHref%>" title="<%=picture.getDescription() %>">
+										<img class="normalPicture"  src="<%=downloadImgHref%>" alt="<%= picture.getName()%>" >
+									</a>
+									<img class="deleteIcon" id="deleteIcon<%=picture.getId()%>" src="/PhotoAlbum/img/delete.jpg" onclick="deleteImage('<%=deleteImgHref%>')">
+									<img class="editIcon" id="editIcon<%=picture.getId()%>" src="/PhotoAlbum/img/edit.jpg" onclick="editImage('<%=editImgHref%>')">
+									<img class="rotateIcon" id="rotateIcon<%=picture.getId()%>" src="/PhotoAlbum/img/rotate.png" onclick="rotateImage('<%=rotateImg%>')">
+									<img class="faceDetectionIcon" id="faceDetectionIcon<%=picture.getId()%>" src="/PhotoAlbum/img/faceDetection.png" onclick="rotateImage('<%=faceDetectionImg%>')">
+									<img class="cropImageIcon" id="cropImageIcon<%=picture.getId()%>" src="/PhotoAlbum/img/scissors.png" onclick="rotateImage('<%=cropImg%>')">
+								</div>
+						<% } %>
 					<% } %>
 				</div><!--/row-->
 			</div><!--/span-->
