@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import com.toshko.photoalbum.data.UserUtils;
 import com.toshko.photoalbum.db.UserRegistry;
+import com.toshko.photoalbum.password.hashing.PasswordHashing;
 
 public class LoginServlet extends HttpServlet{
 	/**
@@ -21,22 +22,26 @@ public class LoginServlet extends HttpServlet{
 	public void doGet(HttpServletRequest aRequest,HttpServletResponse aResponse) throws IOException, ServletException {
 		String username = aRequest.getParameter("username");
 		String password = aRequest.getParameter("password");
-		UserRegistry userRegistry = new UserRegistry();
-		boolean result = userRegistry.isValidCredentials(username, password);
-		
+
 		if(username.equals("admin") && password.equals("admin")) {
 			HttpSession session = aRequest.getSession();
 			session.setAttribute("USER", username);
 			session.setAttribute("PASSWORD", password);
-			UserUtils.setCurrentUser(session, username);		
+			UserUtils.setCurrentUser(session, username);
 			aResponse.sendRedirect("AdminPageServlet.do");
+			return;
 		}
-		else if (result) { 
+
+		UserRegistry userRegistry = new UserRegistry();
+		String hashedPassword = PasswordHashing.generateHash(password);//generate hashed password based on the user input for password.
+		boolean result = userRegistry.isValidCredentials(username, hashedPassword);
+		if (result) { 
 			HttpSession session = aRequest.getSession();
 			session.setAttribute("USER", username);
 			session.setAttribute("PASSWORD", password);
 			UserUtils.setCurrentUser(session, username);
 			aResponse.sendRedirect("showCategories.do");
+			return;
 		}
 		else {
 			Collection<String> errors = new LinkedList<String>();

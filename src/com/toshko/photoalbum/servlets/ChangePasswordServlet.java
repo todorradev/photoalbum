@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.toshko.photoalbum.db.UserRegistry;
 import com.toshko.photoalbum.dto.User;
+import com.toshko.photoalbum.password.hashing.PasswordHashing;
 
 public class ChangePasswordServlet extends HttpServlet{
 	/**
@@ -21,6 +22,7 @@ public class ChangePasswordServlet extends HttpServlet{
 		String categoryId = aRequest.getParameter("categoryId");
 		int userId = Integer.parseInt(strUserId);
 		String currentPass = aRequest.getParameter("currentPass");
+		String hashedCurrentPass = PasswordHashing.generateHash(currentPass);
 		String passwordError = "";
 		String passwordSuccess = "";
 		
@@ -28,9 +30,8 @@ public class ChangePasswordServlet extends HttpServlet{
 		User user = userReg.getCurrentUser(userId);
 		
 		String userPass = user.getPassword();
-		if(currentPass.equals(userPass)) {
+		if(hashedCurrentPass.equals(userPass)) {
 			String newPass = aRequest.getParameter("newPass");
-			String confirmNewPass = aRequest.getParameter("confirmNewPass");
 			if(newPass.length() < 6) {
 				passwordError = "Новата парола не може да съдържа по-малко от 6 символа.";
 				aRequest.setAttribute("passwordError", passwordError);
@@ -38,8 +39,10 @@ public class ChangePasswordServlet extends HttpServlet{
 				aRequest.setAttribute("categoryId", categoryId);
 				aRequest.getRequestDispatcher("ChangePassword.jsp").forward(aRequest, aResponse);
 			}
-			else if(newPass.equals(confirmNewPass)) {
-				boolean isPassChanged = userReg.editUserPass(userPass, newPass);
+			String confirmNewPass = aRequest.getParameter("confirmNewPass");
+			if(newPass.equals(confirmNewPass)) {
+				String hashedNewPass = PasswordHashing.generateHash(newPass);
+				boolean isPassChanged = userReg.editUserPass(userPass, hashedNewPass);
 				if(isPassChanged) {
 					passwordSuccess = "Паролата Ви беше сменена успешно!";
 					aRequest.setAttribute("passwordSuccess", passwordSuccess);

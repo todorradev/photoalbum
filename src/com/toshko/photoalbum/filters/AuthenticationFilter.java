@@ -63,5 +63,5 @@ public class AuthenticationFilter implements Filter {
 	}
 	
 	public void destroy() {
-	}	
+	}
 }

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.toshko.photoalbum.db.UserRegistry;
 import com.toshko.photoalbum.dto.User;
+import com.toshko.photoalbum.password.hashing.PasswordHashing;
 
 public class RegisterServlet extends HttpServlet {
 	/**
@@ -80,7 +81,8 @@ public class RegisterServlet extends HttpServlet {
 			}
 			
 			if(isAllFieldsCorrect) { 
-				User user = new User(username, password, firstName, lastName, email);
+				String hashedPassword = PasswordHashing.generateHash(password);//generate hashed password via SHA-1 algorith and stored it in the DB
+				User user = new User(username, hashedPassword, firstName, lastName, email);
 				UserRegistry userRegistry = new UserRegistry();
 				boolean isUserCreated = userRegistry.createUser(user);
 				if(isUserCreated) {
