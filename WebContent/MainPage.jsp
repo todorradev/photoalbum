@@ -6,7 +6,6 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-
 	
 	<!-- Add jQuery library -->
 	<script type="text/javascript" src="/PhotoAlbum/fancybox/lib/jquery-1.10.1.min.js"></script>
@@ -28,12 +27,18 @@
 
 	<!-- Add Media helper (this is optional) -->
 	<script type="text/javascript" src="/PhotoAlbum/fancybox/source/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+	
+	<!-- jQuery-bPopup-->
+	<script type="text/javascript" src="/PhotoAlbum/jquery-bPopup/js/jquery.bpopup.js"></script>
+	<script type="text/javascript" src="/PhotoAlbum/jquery-bPopup/js/jquery.bpopup.min.js"></script>
+	<script type="text/javascript" src="/PhotoAlbum/jquery-bPopup/js/jquery.easing.1.3.js"></script>
+	<link rel="stylesheet" type="text/css" href="/PhotoAlbum/jquery-bPopup/css/style.css" media="screen" />
 
 <script type="text/javascript">
 $(document).ready(function() {
- $(".fancyGroup").fancybox();
- });
- 
+	$(".fancyGroup").fancybox();
+});
+
 function showNavigationIcons(id)
 {
 	var deleteImg = document.getElementById("deleteIcon" + id);
@@ -46,6 +51,8 @@ function showNavigationIcons(id)
 	faceDetectionImg.style.display="inline";
 	var cropImg = document.getElementById("cropImageIcon" + id);
 	cropImg.style.display="inline";
+	var shareImg = document.getElementById("shareImageIcon" + id);
+	shareImg.style.display="inline";
 }
 
 function hideNavigationIcons(id)
@@ -60,6 +67,8 @@ function hideNavigationIcons(id)
 	faceDetectionImg.style.display="none";
 	var cropImg = document.getElementById("cropImageIcon" + id);
 	cropImg.style.display="none";
+	var shareImg = document.getElementById("shareImageIcon" + id);
+	shareImg.style.display="none";
 }
 
 function deleteImage(href)
@@ -76,6 +85,11 @@ function editImage(href)
 }
 
 function rotateImage(href)
+{
+	window.location.href=href;
+}
+
+function shareImage(href)
 {
 	window.location.href=href;
 }
@@ -134,17 +148,19 @@ function faceDetectionImage(href)
 								String faceDetectionEnabled = "true";
 								String faceDetectionImg = "/PhotoAlbum/showCategories.do?userId=" + request.getAttribute("userId") + "&categoryId=" + categoryId + "&pictureId=" + picture.getId() + "&faceDetection=" + faceDetectionEnabled;
 								String cropImg = "/PhotoAlbum/cropper-master/demo/index.jsp?userId=" + request.getAttribute("userId") + "&categoryId=" + categoryId + "&pictureId=" + picture.getId();
+								String shareImg = "/PhotoAlbum/cropper-master/demo/index.jsp?userId=" + request.getAttribute("userId") + "&categoryId=" + categoryId + "&pictureId=" + picture.getId();
 						%>
 								<div class="col-6 col-sm-6 col-lg-4" onmouseover="showNavigationIcons(<%=picture.getId()%>)" onmouseout="hideNavigationIcons(<%=picture.getId()%>)">
 									<h2><%= picture.getName()%></h2>
 									<a class="fancyGroup" rel="group" href="<%=downloadImgHref%>" title="<%=picture.getDescription() %>">
-										<img class="normalPicture"  src="<%=downloadImgHref%>" alt="<%= picture.getName()%>" >
+										<img class="normalPicture" src="<%=downloadImgHref%>" alt="<%= picture.getName()%>" >
 									</a>
 									<img class="deleteIcon" id="deleteIcon<%=picture.getId()%>" src="/PhotoAlbum/img/delete.jpg" onclick="deleteImage('<%=deleteImgHref%>')">
 									<img class="editIcon" id="editIcon<%=picture.getId()%>" src="/PhotoAlbum/img/edit.jpg" onclick="editImage('<%=editImgHref%>')">
 									<img class="rotateIcon" id="rotateIcon<%=picture.getId()%>" src="/PhotoAlbum/img/rotate.png" onclick="rotateImage('<%=rotateImg%>')">
 									<img class="faceDetectionIcon" id="faceDetectionIcon<%=picture.getId()%>" src="/PhotoAlbum/img/faceDetection.png" onclick="rotateImage('<%=faceDetectionImg%>')">
 									<img class="cropImageIcon" id="cropImageIcon<%=picture.getId()%>" src="/PhotoAlbum/img/scissors.png" onclick="rotateImage('<%=cropImg%>')">
+									<img class="shareImageIcon" id="shareImageIcon<%=picture.getId()%>" src="/PhotoAlbum/img/shareImage.png" onclick="shareImage('<%=shareImg%>')">
 								</div>
 						<% } %>
 					<% } %>

@@ -402,6 +402,16 @@ a {
 	cursor:hand;
 }
 
+.shareImageIcon {
+	display:none;
+	position:absolute;
+	width:16px;
+	height:16px;
+	top: 40px;
+	left: 121px;
+	cursor:hand;
+}
+
 #deleteUserProfileOption, #deleteCategoryOptions{
 	cursor:hand;
 	color:blue;

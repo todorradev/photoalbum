@@ -27,7 +27,7 @@
 								<textarea rows="4" cols="23" name="descriptionOfPicture" id="description"></textarea>
 							</div>
 							
-					    	<input type="file" name="pictureFile" class="upload" required/>
+							<input type="file" name="pictureFile" class="upload" required/>
 							<input type="hidden" name="parent" value="<%= request.getParameter("categoryId")%>" />
 							<input type="hidden" name="userId" value="<%= request.getParameter("userId")%>" />
 							

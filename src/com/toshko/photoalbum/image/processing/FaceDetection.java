@@ -22,7 +22,7 @@ public class FaceDetection {
 		System.out.println("\nRunning FaceDetector");
 	}
 	
-	public static Collection<Picture> scanImages(HttpServletRequest aRequest, int userId) {
+	public static Collection<Picture> scanImages(HttpServletRequest aRequest, int userId, Collection<Picture> pictures) {
 		String categoryIdStr = aRequest.getParameter("categoryId");
 		String pictureIdStr = aRequest.getParameter("pictureId");
 
@@ -30,11 +30,14 @@ public class FaceDetection {
 		int picId = Integer.parseInt(pictureIdStr);
 
 		File[] listOfImages = UserUtils.getPicturesPathByCategory(userId, categoryId, picId);
+		
 		if(listOfImages != null) {
 
 			CategoryXPictures categoryXPicture = new CategoryXPictures();
-			Collection<Picture> pictures  = categoryXPicture.getPicturesByCategory(categoryId, "");
-	
+
+			if(pictures == null)
+				pictures  = categoryXPicture.getPicturesByCategory(categoryId, "");
+
 			CascadeClassifier cascade1 = new CascadeClassifier();
 			cascade1.load("C:/Program Files/OpenCV/opencv/sources/data/haarcascades/haarcascade_frontalface_alt.xml");
 			MatOfRect faceDetections = new MatOfRect();

@@ -154,3 +154,13 @@ label {
 	color:green;
 	font-weight: 700;
 }
+
+/*change the style of the hedader in change password page*/
+#changePasswordHeader {
+	margin-left: 32%;
+	font-size: 26px;
+}
+
+.changePasswordButtons {
+	margin-left: 20%;
+}
