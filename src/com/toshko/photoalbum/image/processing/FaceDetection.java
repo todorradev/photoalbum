@@ -5,7 +5,6 @@ import java.util.Collection;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfRect;
 import org.opencv.imgcodecs.Imgcodecs;
@@ -18,7 +17,6 @@ import com.toshko.photoalbum.dto.Picture;
 public class FaceDetection {
 
 	static {
-		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 		System.out.println("\nRunning FaceDetector");
 	}
 	

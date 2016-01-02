@@ -37,8 +37,6 @@ public class RotatePictureServlet extends HttpServlet {
 	}
 	
 	private void rotateImage(int userId, int categoryId, int pictureId) {
-		System.loadLibrary( Core.NATIVE_LIBRARY_NAME );
-		
 		File file = UserUtils.getPicturePath(userId, categoryId, pictureId);
 		Mat cvImage = Imgcodecs.imread(file.getAbsolutePath());
 		

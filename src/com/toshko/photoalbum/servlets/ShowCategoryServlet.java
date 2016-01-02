@@ -33,6 +33,7 @@ public class ShowCategoryServlet extends HttpServlet {
 		String faceDection = aRequest.getParameter("faceDetection");
 		if(faceDection != null) {
 
+			String test = aRequest.getParameter("filteredPictures");
 			String userIdStr = aRequest.getParameter("userId");
 			int userId = Integer.parseInt(userIdStr);
 			Collection<Picture> filteredPictures = showPicturesByFiltering.getFilteredPictures();
@@ -94,11 +95,8 @@ public class ShowCategoryServlet extends HttpServlet {
 		CategoryXPictures categoryXPicture = new CategoryXPictures();
 		Collection<Picture> pictures  = categoryXPicture.getPicturesByCategory(categoryId, searchCategoriesAndPictures);
 
-		if(searchCategoriesAndPictures != "") {
-			showPicturesByFiltering.setFilteredPictures(pictures);
-		}
-
 		aRequest.setAttribute("pictures", pictures);
+		aRequest.setAttribute("filteredPictures", searchCategoriesAndPictures);
 		aRequest.setAttribute("userId", userId);
 		aRequest.setAttribute("username", username);
 		aRequest.setAttribute("searchCategoriesAndPictures", searchCategoriesAndPictures);

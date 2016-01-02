@@ -32,43 +32,43 @@ public class AddPictureServlet extends HttpServlet{
 		String strParentDirectoryId = null;
 		String strUserId = null;
 		byte[] fileContent = null;
-		
+
 		try {
-	        List<FileItem> items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(aRequest);
-	        for (FileItem item : items) {
-	            if (item.isFormField()) {
-	                // Process regular form field (input type="text|radio|checkbox|etc", select, etc).
-	            	if ("nameOfPicture".equals(item.getFieldName())) {
-	            		nameOfPicture = item.getString();
-	            	} else if ("descriptionOfPicture".equals(item.getFieldName())) {
-	            		descriptionOfPicture = item.getString();
-	            	} else if ("parent".equals(item.getFieldName())) {
-	            		strParentDirectoryId = item.getString();
-	            	}else if ("userId".equals(item.getFieldName())) {
-	            		strUserId = item.getString();
-	            	}
-	            } else {
-	                // Process form file field (input type="file").
-	            	if ("pictureFile".equals(item.getFieldName())) {
-	            		InputStream is = item.getInputStream();
-		                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		                int read = -1;
-		                byte[] cnt = new byte[1024];
-		                while (true) {
-		                	read = is.read(cnt);
-		                	if (read == -1) {
-		                		break;
-		                	}
-		                	baos.write(cnt, 0, read);
-		                }
-		                is.close();
-		                fileContent = baos.toByteArray();	
-	            	}	                
-	            }
-	        }
-	    } catch (FileUploadException e) {
-	        throw new ServletException("Cannot parse multipart request.", e);
-	    }
+			List<FileItem> items = new ServletFileUpload(new DiskFileItemFactory()).parseRequest(aRequest);
+			for (FileItem item : items) {
+				if (item.isFormField()) {
+					// Process regular form field (input type="text|radio|checkbox|etc", select, etc).
+					if ("nameOfPicture".equals(item.getFieldName())) {
+						nameOfPicture = item.getString();
+					} else if ("descriptionOfPicture".equals(item.getFieldName())) {
+						descriptionOfPicture = item.getString();
+					} else if ("parent".equals(item.getFieldName())) {
+						strParentDirectoryId = item.getString();
+					}else if ("userId".equals(item.getFieldName())) {
+						strUserId = item.getString();
+					}
+				} else {
+					//Process form file field (input type="file").
+					if ("pictureFile".equals(item.getFieldName())) {
+						InputStream is = item.getInputStream();
+						ByteArrayOutputStream baos = new ByteArrayOutputStream();
+						int read = -1;
+						byte[] cnt = new byte[1024];
+						while (true) {
+							read = is.read(cnt);
+							if (read == -1) {
+								break;
+							}
+							baos.write(cnt, 0, read);
+						}
+						is.close();
+						fileContent = baos.toByteArray();	
+					}
+				}
+			}
+		} catch (FileUploadException e) {
+			throw new ServletException("Cannot parse multipart request.", e);
+		}
 
 		int parentDirectoryId = Integer.parseInt(strParentDirectoryId);
 		int userId = Integer.parseInt(strUserId);
@@ -76,12 +76,11 @@ public class AddPictureServlet extends HttpServlet{
 		Picture picture = new Picture(nameOfPicture, descriptionOfPicture, UserUtils.getCurrentTime(), fileContent);
 		AdminDB admin = new AdminDB();
 		admin.createPicture(userId, parentDirectoryId, picture);
-		
-		
+
 		aRequest.setAttribute("picture", picture);
 		aResponse.sendRedirect("showCategories.do?categoryId=" + parentDirectoryId);
 	}
-	
+
 	public void doPost(HttpServletRequest aRequest,HttpServletResponse aResponse) throws IOException, ServletException {
 		doGet(aRequest, aResponse);
 	}
