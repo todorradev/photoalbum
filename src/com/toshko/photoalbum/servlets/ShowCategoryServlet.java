@@ -15,28 +15,28 @@ import com.toshko.photoalbum.db.UserRegistry;
 import com.toshko.photoalbum.db.UserXCategoryDB;
 import com.toshko.photoalbum.dto.Category;
 import com.toshko.photoalbum.dto.Picture;
-import com.toshko.photoalbum.dto.ShowPicturesByFiltering;
 import com.toshko.photoalbum.dto.User;
 import com.toshko.photoalbum.image.processing.FaceDetection;
 
 public class ShowCategoryServlet extends HttpServlet {
-	
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static ShowPicturesByFiltering showPicturesByFiltering = new ShowPicturesByFiltering();
-	
 
-	public void doGet(HttpServletRequest aRequest,HttpServletResponse aResponse) throws IOException, ServletException {
+	public void doGet(HttpServletRequest aRequest, HttpServletResponse aResponse) throws IOException, ServletException {
 		HttpSession session = aRequest.getSession(false);
 		String faceDection = aRequest.getParameter("faceDetection");
-		if(faceDection != null) {
+		if (faceDection != null) {
 
-			String test = aRequest.getParameter("filteredPictures");
 			String userIdStr = aRequest.getParameter("userId");
 			int userId = Integer.parseInt(userIdStr);
-			Collection<Picture> filteredPictures = showPicturesByFiltering.getFilteredPictures();
+			String searchedText = getSearchText(aRequest);
+			int categoryId = getCategoryId(aRequest, userId);
+
+			CategoryXPictures categoryXPicture = new CategoryXPictures();
+			Collection<Picture> filteredPictures = categoryXPicture.getPicturesByCategory(categoryId, searchedText);
 
 			Collection<Picture> pictures = FaceDetection.scanImages(aRequest, userId, filteredPictures);
 
@@ -50,50 +50,37 @@ public class ShowCategoryServlet extends HttpServlet {
 
 		Object objUsername = session.getAttribute("USER");
 		String username = objUsername.toString();
-		
+
 		UserRegistry userReg = new UserRegistry();
 		Collection<User> users = userReg.getUsers();
 		int userId = 0;
 		for (User user : users) {
-			if(username.equals(user.getUsername())) {
+			if (username.equals(user.getUsername())) {
 				userId = user.getId();
 				break;
 			}
 		}
-		
-		Object objCategoryId = aRequest.getParameter("categoryId");
-		int categoryId = -2;
 
-		if(objCategoryId != null) {
-			categoryId = Integer.parseInt(objCategoryId.toString());
-		}
-
-		else {
-			UserXCategoryDB userCategory = new UserXCategoryDB();
-			categoryId = userCategory.getRootCategory(userId);
-		}
+		int categoryId = getCategoryId(aRequest, userId);
 
 		CategoryDB categoryDb = new CategoryDB();
 		Category category = categoryDb.getCategory(categoryId);
 
-		Object objSearch = aRequest.getParameter("searchCategoriesAndPictures");
-		String searchCategoriesAndPictures = "";
-		if (objSearch != null) {
-			searchCategoriesAndPictures = objSearch.toString();
-		}
+		String searchCategoriesAndPictures = getSearchText(aRequest);
 
-		Collection<Category> childCategories = categoryDb.getDirectSubCategories(userId, categoryId, searchCategoriesAndPictures);
+		Collection<Category> childCategories = categoryDb.getDirectSubCategories(userId, categoryId,
+				searchCategoriesAndPictures);
 		Collection<Category> parentCategories = categoryDb.getFullPathOfDirectories(userId, categoryId);
 		aRequest.setAttribute("category", category);
 		aRequest.setAttribute("categoryId", category.getId());
 		session.setAttribute("parentCategories", parentCategories);
 
-		if(childCategories.size() > 0) {
+		if (childCategories.size() > 0) {
 			aRequest.setAttribute("childCategories", childCategories);
 		}
-		
+
 		CategoryXPictures categoryXPicture = new CategoryXPictures();
-		Collection<Picture> pictures  = categoryXPicture.getPicturesByCategory(categoryId, searchCategoriesAndPictures);
+		Collection<Picture> pictures = categoryXPicture.getPicturesByCategory(categoryId, searchCategoriesAndPictures);
 
 		aRequest.setAttribute("pictures", pictures);
 		aRequest.setAttribute("filteredPictures", searchCategoriesAndPictures);
@@ -103,7 +90,34 @@ public class ShowCategoryServlet extends HttpServlet {
 		aRequest.getRequestDispatcher("MainPage.jsp").forward(aRequest, aResponse);
 	}
 	
-	public void doPost(HttpServletRequest aRequest,HttpServletResponse aResponse) throws IOException, ServletException {
+	private String getSearchText(HttpServletRequest aRequest) {
+		Object objSearch = aRequest.getParameter("searchCategoriesAndPictures");
+		String searchCategoriesAndPictures = "";
+		if (objSearch != null) {
+			searchCategoriesAndPictures = objSearch.toString();
+		}
+
+		return searchCategoriesAndPictures;
+	}
+	
+	private int getCategoryId(HttpServletRequest aRequest, int userId) {
+		Object objCategoryId = aRequest.getParameter("categoryId");
+		int categoryId = -2;
+
+		if (objCategoryId != null) {
+			categoryId = Integer.parseInt(objCategoryId.toString());
+		}
+
+		else {
+			UserXCategoryDB userCategory = new UserXCategoryDB();
+			categoryId = userCategory.getRootCategory(userId);
+		}
+
+		return categoryId;
+	}
+
+	public void doPost(HttpServletRequest aRequest, HttpServletResponse aResponse)
+			throws IOException, ServletException {
 		doGet(aRequest, aResponse);
 	}
 }
